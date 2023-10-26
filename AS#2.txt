@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int numDigits(int input);
+int isArmstrong(int number);
+
+int main() {
+    int number = 0;
+    int armstrongCount = 0;
+
+    while (armstrongCount < 15) {
+        if (isArmstrong(number)) {
+            printf("%d is an Armstrong number.\n", number);
+            armstrongCount++;
+        }
+        number++;
+    }
+
+    return 0;
+}
+
+int numDigits(int input) {
+    int count = 0;
+    while (input > 0) {
+        count++;
+        input = input / 10;
+    }
+    return count;
+}
+
+int isArmstrong(int number) {
+    int n, count, remainder, sum = 0, temp;
+    temp = number;
+    n = numDigits(number);
+
+    for (temp; number != 0; number) {
+        remainder = number % 10;
+        count = n;
+        while (count > 1) {
+            remainder *= number % 10;
+            count--;
+        }
+        sum += remainder;
+        number = number / 10;
+    }
+
+    return sum == temp;
+}
